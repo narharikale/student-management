@@ -1,4 +1,4 @@
-import EditStudentForm from "@/components/molecules/EditStudentform";
+import StudentForm from "@/components/molecules/StudentForm";
 import StudentList from "@/components/organism/StudentList";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 
@@ -15,7 +15,7 @@ const Home = () => {
             <CardTitle>Add New Student</CardTitle>
           </CardHeader>
           <CardContent>
-            <EditStudentForm />
+            <StudentForm />
           </CardContent>
         </Card>
 

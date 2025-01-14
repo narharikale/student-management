@@ -1,8 +1,8 @@
+import { studentData } from "@/lib/utils";
 import StudentCard from "../molecules/StudentCard";
 import { Input } from "../ui/input";
 
 const StudentList = () => {
-  const studentData: any[] = [];
   return (
     <div className="flex flex-col gap-4">
       <Input type="text" placeholder="Search by name..." />
