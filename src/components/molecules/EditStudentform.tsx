@@ -15,9 +15,9 @@ const EditStudentForm = () => {
   const form = useForm<Student>({
     defaultValues: {
       name: "",
-      age: 0,
-      class: "",
-      phoneNumber: "",
+      age: "",
+      studentClass: "",
+      phone: "",
     },
   });
 
@@ -59,7 +59,7 @@ const EditStudentForm = () => {
         />
         <FormField
           control={form.control}
-          name="class"
+          name="studentClass"
           rules={{ required: "This field is required" }}
           render={({ field }) => (
             <FormItem>
@@ -74,7 +74,7 @@ const EditStudentForm = () => {
         />
         <FormField
           control={form.control}
-          name="phoneNumber"
+          name="phone"
           rules={{ required: "This field is required" }}
           render={({ field }) => (
             <FormItem>
