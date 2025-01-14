@@ -91,7 +91,10 @@ const EditStudentForm = () => {
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
+
+        <Button type="submit" className="mt-3 bg-blue-600">
+          Submit
+        </Button>
       </form>
     </Form>
   );

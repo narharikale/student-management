@@ -19,9 +19,13 @@ const StudentCard = (data: Student) => {
         <p>Class: {data.studentClass}</p>
         <p>Phone: {data.phone}</p>
       </CardContent>
-      <CardFooter>
-        <Button type="button">Edit</Button>
-        <Button type="button">Delete</Button>
+      <CardFooter className="flex gap-3">
+        <Button type="button" className="bg-blue-600">
+          Edit
+        </Button>
+        <Button type="button" className="bg-red-600">
+          Delete
+        </Button>
       </CardFooter>
     </Card>
   );
