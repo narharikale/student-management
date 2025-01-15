@@ -11,8 +11,6 @@ export interface Studentwithid extends Student {
   id: string;
 }
 
-const API_BASE_URL = "http://localhost:5001";
-
 interface StudentApiContextType {
   students: Studentwithid[];
   loading: boolean;
@@ -30,6 +28,10 @@ interface StudentApiContextType {
 const StudentApiContext = createContext<StudentApiContextType | undefined>(
   undefined
 );
+
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
+console.log(API_BASE_URL, "api");
 
 export const StudentApiProvider = ({ children }: { children: ReactNode }) => {
   const [students, setStudents] = useState<Studentwithid[]>([]);

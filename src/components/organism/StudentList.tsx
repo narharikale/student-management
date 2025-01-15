@@ -11,7 +11,7 @@ const StudentList = () => {
     getStudents();
   }, []);
 
-  const filteredStudents = students.filter((student) =>
+  const filteredStudents = students?.filter((student) =>
     student.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
@@ -26,7 +26,7 @@ const StudentList = () => {
       {loading ? (
         <p>Loading...</p>
       ) : (
-        filteredStudents.map((student) => {
+        filteredStudents?.map((student) => {
           return <StudentCard key={student.id} {...student} />;
         })
       )}
