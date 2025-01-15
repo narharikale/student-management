@@ -20,13 +20,11 @@ type Props = {
 };
 
 const EditStudentModal = ({ isModalOpen, handleModalOpen, values }: Props) => {
-  const { updateStudent, loading, getStudents } = useStudentApi();
+  const { updateStudent, loading } = useStudentApi();
   const form = useForm<Student>({ defaultValues: values });
 
   const submitHandler = async (updatedValues: Student) => {
     await updateStudent(values.id, updatedValues);
-    await getStudents();
-    console.log("updared stuned fetinddnf");
     handleModalOpen(false);
   };
 

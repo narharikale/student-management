@@ -1,13 +1,15 @@
-import './App.css'
-import Home from './apps/page'
+import "./App.css";
+import Home from "./apps/page";
+import { StudentApiProvider } from "./hooks/useStudentApi";
 
 function App() {
-
   return (
-    <div>
-     <Home />
-    </div>
-  )
+    <StudentApiProvider>
+      <div>
+        <Home />
+      </div>
+    </StudentApiProvider>
+  );
 }
 
-export default App
+export default App;

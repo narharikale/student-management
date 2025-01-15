@@ -7,13 +7,8 @@ const StudentList = () => {
   const { students, getStudents, loading } = useStudentApi();
 
   useEffect(() => {
-    console.log("useEffect g");
     getStudents();
   }, []);
-
-  useEffect(() => {
-    console.log(students, "useEFfert");
-  }, [students]);
 
   return (
     <div className="flex flex-col gap-4">

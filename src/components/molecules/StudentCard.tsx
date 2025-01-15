@@ -18,18 +18,11 @@ import EditStudentModal from "../organism/EditStudentModal";
 
 const StudentCard = (data: Student) => {
   const [modalOpen, setModalOpen] = useState(false);
-  const { updateStudent, deleteStudent, loading, getStudents } =
-    useStudentApi();
+  const { deleteStudent, loading, getStudents } = useStudentApi();
 
   const handleDelete = async () => {
     await deleteStudent(data.id);
     await getStudents();
-  };
-
-  const handleEdit = async (updatedData: Student) => {
-    await updateStudent(data.id, updatedData);
-    await getStudents();
-    setModalOpen(false);
   };
 
   return (
