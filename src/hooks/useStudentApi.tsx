@@ -1,6 +1,5 @@
 import { createContext, useContext, useState, type ReactNode } from "react";
 import axios from "axios";
-// import type { Student } from "@/types/student";
 export type Student = {
   name: string;
   age: number;
@@ -46,7 +45,6 @@ export const StudentApiProvider = ({ children }: { children: ReactNode }) => {
     try {
       const response = await axios.get(`${API_BASE_URL}/api/students`);
       const data = response.data as { data: Studentwithid[] };
-      console.log(data.data, "in getStudents");
       setStudents(data.data);
     } catch (err) {
       setError(err as Error);
@@ -63,8 +61,8 @@ export const StudentApiProvider = ({ children }: { children: ReactNode }) => {
         `${API_BASE_URL}/api/students`,
         student
       );
-      const newStudent = response.data as Studentwithid;
-      setStudents([...students, newStudent]);
+      const newStudent = (response.data as { data: Studentwithid }).data;
+      setStudents([newStudent, ...students]);
       showToast("Student created successfully", "success");
     } catch (err) {
       setError(err as Error);
