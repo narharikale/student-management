@@ -4,7 +4,7 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 
 const Home = () => {
   return (
-    <main className="container mx-auto p-6">
+    <main className="mx-auto p-6 min-h-full">
       <h1 className="mb-8 scroll-m-20 text-4xl font-bold tracking-tight">
         Student Management System
       </h1>
