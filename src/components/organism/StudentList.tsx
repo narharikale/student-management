@@ -1,14 +1,30 @@
-import { studentData } from "@/lib/utils";
+import { useEffect } from "react";
+import useStudentApi from "@/hooks/useStudentApi";
 import StudentCard from "../molecules/StudentCard";
 import { Input } from "../ui/input";
 
 const StudentList = () => {
+  const { students, getStudents, loading } = useStudentApi();
+
+  useEffect(() => {
+    console.log("useEffect g");
+    getStudents();
+  }, []);
+
+  useEffect(() => {
+    console.log(students, "useEFfert");
+  }, [students]);
+
   return (
     <div className="flex flex-col gap-4">
       <Input type="text" placeholder="Search by name..." />
-      {studentData.map((student) => {
-        return <StudentCard key={student.id} {...student} />;
-      })}
+      {loading ? (
+        <p>Loading...</p>
+      ) : (
+        students?.map((student) => {
+          return <StudentCard key={student.id} {...student} />;
+        })
+      )}
     </div>
   );
 };

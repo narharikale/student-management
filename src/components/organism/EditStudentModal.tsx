@@ -11,6 +11,7 @@ import {
 } from "../ui/form";
 import { Input } from "../ui/input";
 import { Student } from "@/types/student";
+import useStudentApi from "@/hooks/useStudentApi";
 
 type Props = {
   handleModalOpen: (open: boolean) => void;
@@ -19,10 +20,14 @@ type Props = {
 };
 
 const EditStudentModal = ({ isModalOpen, handleModalOpen, values }: Props) => {
-  const form = useForm<Student>({ values });
+  const { updateStudent, loading, getStudents } = useStudentApi();
+  const form = useForm<Student>({ defaultValues: values });
 
-  const submitHandler = (values: Student) => {
-    console.log(values, "submit");
+  const submitHandler = async (updatedValues: Student) => {
+    await updateStudent(values.id, updatedValues);
+    await getStudents();
+    console.log("updared stuned fetinddnf");
+    handleModalOpen(false);
   };
 
   return (
@@ -69,7 +74,7 @@ const EditStudentModal = ({ isModalOpen, handleModalOpen, values }: Props) => {
               />
               <FormField
                 control={form.control}
-                name="studentClass"
+                name="class"
                 rules={{ required: "This field is required" }}
                 render={({ field }) => (
                   <FormItem>
@@ -84,7 +89,7 @@ const EditStudentModal = ({ isModalOpen, handleModalOpen, values }: Props) => {
               />
               <FormField
                 control={form.control}
-                name="phone"
+                name="phonenumber"
                 rules={{ required: "This field is required" }}
                 render={({ field }) => (
                   <FormItem>
@@ -110,7 +115,9 @@ const EditStudentModal = ({ isModalOpen, handleModalOpen, values }: Props) => {
             >
               Close
             </Button>
-            <Button type="submit">Update Changes</Button>
+            <Button type="submit" disabled={loading}>
+              Update Changes
+            </Button>
           </form>
         </Form>
       </DialogContent>

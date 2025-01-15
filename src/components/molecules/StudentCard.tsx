@@ -1,3 +1,6 @@
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
+
 import { useState } from "react";
 import { Student } from "@/types/student";
 import {
@@ -8,10 +11,26 @@ import {
   CardTitle,
 } from "../ui/card";
 import { Button } from "../ui/button";
+
+import useStudentApi from "@/hooks/useStudentApi";
+
 import EditStudentModal from "../organism/EditStudentModal";
 
 const StudentCard = (data: Student) => {
   const [modalOpen, setModalOpen] = useState(false);
+  const { updateStudent, deleteStudent, loading, getStudents } =
+    useStudentApi();
+
+  const handleDelete = async () => {
+    await deleteStudent(data.id);
+    await getStudents();
+  };
+
+  const handleEdit = async (updatedData: Student) => {
+    await updateStudent(data.id, updatedData);
+    await getStudents();
+    setModalOpen(false);
+  };
 
   return (
     <Card>
@@ -20,18 +39,24 @@ const StudentCard = (data: Student) => {
       </CardHeader>
       <CardContent>
         <p>Age: {data.age}</p>
-        <p>Class: {data.studentClass}</p>
-        <p>Phone: {data.phone}</p>
+        <p>Class: {data.class}</p>
+        <p>Phone: {data.phonenumber}</p>
       </CardContent>
       <CardFooter className="flex gap-3">
         <Button
           onClick={() => setModalOpen(true)}
           type="button"
           className="bg-blue-600"
+          disabled={loading}
         >
           Edit
         </Button>
-        <Button type="button" className="bg-red-600">
+        <Button
+          onClick={handleDelete}
+          type="button"
+          className="bg-red-600"
+          disabled={loading}
+        >
           Delete
         </Button>
       </CardFooter>
@@ -39,7 +64,9 @@ const StudentCard = (data: Student) => {
         values={data}
         isModalOpen={modalOpen}
         handleModalOpen={setModalOpen}
+        // onSave={handleEdit}
       ></EditStudentModal>
+      <ToastContainer />
     </Card>
   );
 };

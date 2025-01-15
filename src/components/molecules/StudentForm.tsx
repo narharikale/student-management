@@ -10,19 +10,21 @@ import {
 import type { Student } from "../../types/student";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
+import useStudentApi from "@/hooks/useStudentApi";
 
 const EditStudentForm = () => {
+  const { createStudent, loading } = useStudentApi();
   const form = useForm<Student>({
     defaultValues: {
       name: "",
-      age: "",
-      studentClass: "",
-      phone: "",
+      age: 0,
+      class: "",
+      phonenumber: "",
     },
   });
 
   const submitHandler = (values: Student) => {
-    console.log(values, "submit");
+    createStudent(values);
   };
 
   return (
@@ -59,7 +61,7 @@ const EditStudentForm = () => {
         />
         <FormField
           control={form.control}
-          name="studentClass"
+          name="class"
           rules={{ required: "This field is required" }}
           render={({ field }) => (
             <FormItem>
@@ -74,7 +76,7 @@ const EditStudentForm = () => {
         />
         <FormField
           control={form.control}
-          name="phone"
+          name="phonenumber"
           rules={{ required: "This field is required" }}
           render={({ field }) => (
             <FormItem>
@@ -92,7 +94,7 @@ const EditStudentForm = () => {
           )}
         />
 
-        <Button type="submit" className="mt-3 bg-blue-600">
+        <Button type="submit" className="mt-3 bg-blue-600" disabled={loading}>
           Submit
         </Button>
       </form>
